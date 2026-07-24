@@ -110,7 +110,7 @@
     });
 
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('TIMEOUT')), 1200)
+      setTimeout(() => reject(new Error('TIMEOUT')), 3000)
     );
 
     try {
