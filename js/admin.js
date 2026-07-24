@@ -108,7 +108,7 @@
     renderTable(filtered);
   }
 
-  // Set 5-second connection timeout guard to prevent infinite loading spinner
+  // Set 15-second connection timeout guard to allow database provisioning and initial connection
   const connectionTimeout = setTimeout(() => {
     if (!isInitialLoaded) {
       if (statusIndicator) {
@@ -118,17 +118,17 @@
         <tr>
           <td colspan="6" class="loading-state" style="color: #ff9d9d; line-height: 1.8;">
             <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; color: #ff7c73;">⚠️ تعذّر الاتصال بقاعدة بيانات الفايربيز (Cloud Firestore)</div>
-            <div>يرجى التأكد من الخطوات التالية في <strong>Firebase Console</strong>:</div>
+            <div>يرجى التأكد من التبويب <strong>Data</strong> في <strong>Firebase Console</strong>:</div>
             <ul style="text-align: right; display: inline-block; margin-top: 10px; font-size: 0.85rem; color: #ccc;">
-              <li>1. الدخول لموقع <strong>console.firebase.google.com</strong> واختيار المشروع <code>my-student-e9a87</code>.</li>
-              <li>2. الانتقال إلى <strong>Firestore Database</strong> والضغط على <strong>Create Database (إنشاء قاعدة بيانات)</strong>.</li>
-              <li>3. من تبويب <strong>Rules (القواعد)</strong>، اجعل الصلاحيات تسمح بالقراءة والكتابة: <code>allow read, write: if true;</code></li>
+              <li>1. في صفحة <strong>Cloud Firestore</strong>، اضغط على تبويب <strong>Data</strong> (بجوار تبويب Security).</li>
+              <li>2. اضغط على زر <strong>Create Database (إنشاء قاعدة البيانات)</strong> في حال عدم إنشائها بعد.</li>
+              <li>3. انتظر دقيقة واحدة لاكتمال إنشاء قاعدة البيانات على سيرفرات جوجل.</li>
             </ul>
           </td>
         </tr>
       `;
     }
-  }, 5000);
+  }, 15000);
 
   // ── Firestore Realtime Listener ──
   db.collection('reservations')
@@ -169,7 +169,7 @@
             <div style="font-size: 1rem; font-weight: bold; margin-bottom: 6px;">حدث خطأ في تحميل البيانات من الفايربيز</div>
             <div style="font-size: 0.85rem; color: #ff9d9d; direction: ltr; margin-bottom: 6px;">${error.message}</div>
             <div style="font-size: 0.85rem; color: #d3d5d8;">
-              💡 <strong>حل المشكلة:</strong> تأكد من تفعيل Cloud Firestore في Firebase Console وتعديل Rules إلى <code>allow read, write: if true;</code>
+              💡 <strong>حل المشكلة:</strong> اضغط على تبويب <strong>Data</strong> في Firebase Console للتأكد من تفعيل قواعد البيانات Create Database.
             </div>
           </td>
         </tr>
