@@ -191,32 +191,37 @@
       });
     };
 
-    qrRenderPromise = new Promise((resolve, reject) => {
+    qrRenderPromise = new Promise((resolve) => {
       if (!window.QRCode) {
-        reject(new Error('QR library is unavailable'));
+        resolve();
         return;
       }
       try {
         renderQr();
-        window.setTimeout(() => {
-          qrTarget.querySelector('canvas') ? resolve() : reject(new Error('QR canvas was not created'));
-        }, 80);
+        window.setTimeout(() => { resolve(); }, 80);
       } catch (error) {
-        reject(error);
+        console.warn('QR render warning:', error);
+        resolve();
       }
     });
   }
 
   function openSuccess(reservation) {
     activeReservation = reservation;
-    populateCard(reservation);
-    cardImagePromise = qrRenderPromise.then(() => document.fonts.ready).then(createCardImage);
-    cardImagePromise.catch(error => console.error('Card preparation failed:', error));
+    // Show modal immediately!
     document.body.classList.add('modal-open');
     successExperience.classList.add('open');
     successExperience.setAttribute('aria-hidden', 'false');
     successExperience.scrollTop = 0;
-    window.setTimeout(() => downloadButton.focus(), 800);
+
+    try {
+      populateCard(reservation);
+      cardImagePromise = qrRenderPromise.then(() => document.fonts.ready).then(createCardImage);
+      cardImagePromise.catch(error => console.warn('Card image preparation warning:', error));
+    } catch (e) {
+      console.warn('Populate card warning:', e);
+    }
+    window.setTimeout(() => downloadButton.focus(), 500);
   }
 
   function closeSuccess() {
