@@ -144,6 +144,23 @@
     }
   }
 
+  function formatPhone(phone) {
+    const digits = (phone || '').replace(/\D/g, '');
+    return `+20 ${digits.slice(0, 3)} ${digits.slice(3, 7)} ${digits.slice(7)}`;
+  }
+
+  function buildReservation() {
+    const grade = form.querySelector('input[name="grade"]:checked').value;
+    return {
+      reservation_number: '',
+      student_name: fieldConfig.name.input.value.trim().replace(/\s+/g, ' '),
+      phone_number: fieldConfig.phone.input.value.replace(/\D/g, ''),
+      grade,
+      status: 'CONFIRMED',
+      reservation_date: new Date().toISOString()
+    };
+  }
+
   async function createUniquelyNumberedReservation(baseReservation) {
     const code = await allocateReservationNumber(baseReservation.grade);
     const reservation = { ...baseReservation, reservation_number: code };
