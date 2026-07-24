@@ -98,49 +98,36 @@
     const prefix = (grade === 'First Secondary') ? 'P' : 'A';
     const fieldKey = (grade === 'First Secondary') ? 'lastP' : 'lastA';
 
-    const transactionPromise = db.runTransaction(async (transaction) => {
-      const counterDoc = await transaction.get(counterRef);
-      let lastNum = 0;
-      if (counterDoc.exists) {
-        lastNum = counterDoc.data()[fieldKey] || 0;
-      }
-      const nextNum = lastNum + 1;
-      transaction.set(counterRef, { [fieldKey]: nextNum }, { merge: true });
-      return nextNum;
-    });
-
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('TIMEOUT')), 2500)
-    );
-
     try {
-      const newSeq = await Promise.race([transactionPromise, timeoutPromise]);
+      const newSeq = await db.runTransaction(async (transaction) => {
+        const counterDoc = await transaction.get(counterRef);
+        let lastNum = 0;
+        if (counterDoc.exists) {
+          lastNum = counterDoc.data()[fieldKey] || 0;
+        }
+        const nextNum = lastNum + 1;
+        transaction.set(counterRef, { [fieldKey]: nextNum }, { merge: true });
+        return nextNum;
+      });
+
       localStorage.setItem(`peso_last_${prefix}`, newSeq.toString());
       return `${prefix}${newSeq}`;
     } catch (err) {
-      console.warn('Counter allocation using instant local sequence:', err);
+      console.warn('Counter allocation fallback used:', err);
       return getLocalSequence(prefix);
     }
   }
 
   async function persistReservation(reservation) {
-    const writePromise = reservationsRef.add({
-      ...reservation,
-      created_at: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('TIMEOUT')), 2500)
-    );
-
     try {
-      const docRef = await Promise.race([writePromise, timeoutPromise]);
+      const docRef = await reservationsRef.add({
+        ...reservation,
+        created_at: firebase.firestore.FieldValue.serverTimestamp()
+      });
       return { ...reservation, id: docRef.id };
     } catch (error) {
-      console.warn('Background sync activated for reservation:', error);
-      // Fire-and-forget background save when network responds
-      writePromise.catch(e => console.error('Background write failed:', e));
-      return { ...reservation, id: 'local-' + Date.now() };
+      console.error('Persist reservation error:', error);
+      throw new Error('حدث خطأ أثناء حفظ البيانات. حاول مرة أخرى.');
     }
   }
 
