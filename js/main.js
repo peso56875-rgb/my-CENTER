@@ -123,17 +123,16 @@
     }
   }
 
-  async function persistReservation(reservation) {
-    try {
-      const docRef = await reservationsRef.add({
-        ...reservation,
-        created_at: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      return { ...reservation, id: docRef.id };
-    } catch (error) {
+  function persistReservation(reservation) {
+    // Fire-and-forget: persist to Firestore in background, don't block UI
+    reservationsRef.add({
+      ...reservation,
+      created_at: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(docRef => {
+      console.log('Reservation saved to Firestore:', docRef.id);
+    }).catch(error => {
       console.warn('Firestore add background sync:', error);
-      return { ...reservation, id: 'local-' + Date.now() };
-    }
+    });
   }
 
   function formatPhone(phone) {
@@ -156,8 +155,9 @@
   async function createUniquelyNumberedReservation(baseReservation) {
     const code = await allocateReservationNumber(baseReservation.grade);
     const reservation = { ...baseReservation, reservation_number: code };
-    const saved = await persistReservation(reservation);
-    return saved;
+    // Save to Firestore in background (non-blocking)
+    persistReservation(reservation);
+    return reservation;
   }
 
   function populateCard(reservation) {
@@ -261,12 +261,23 @@
 
     try {
       const reservation = buildReservation();
-      const saved = await createUniquelyNumberedReservation(reservation);
+      let saved;
+      try {
+        saved = await createUniquelyNumberedReservation(reservation);
+      } catch (innerError) {
+        console.warn('Reservation number allocation failed, using fallback:', innerError);
+        reservation.reservation_number = getLocalSequence(reservation.grade === 'First Secondary' ? 'P' : 'A');
+        // Still try to persist in background
+        persistReservation(reservation);
+        saved = reservation;
+      }
       openSuccess(saved);
     } catch (error) {
       console.error('Submit error:', error);
+      // Ultimate fallback: show success even if everything fails
       const fallbackReservation = buildReservation();
       fallbackReservation.reservation_number = getLocalSequence(fallbackReservation.grade === 'First Secondary' ? 'P' : 'A');
+      persistReservation(fallbackReservation);
       openSuccess(fallbackReservation);
     } finally {
       reserveButton.classList.remove('loading');

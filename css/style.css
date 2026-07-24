@@ -124,7 +124,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   .site-header { height:78px;padding:0 20px }.header-status{display:none}.hero{padding:108px 20px 34px;min-height:100svh}.hero-title{font-size:clamp(3rem,13.5vw,6.6rem);line-height:.84}.hero-kicker{font-size:.52rem}.hero-bottom{grid-template-columns:1fr auto;margin-top:7vh}.scroll-cue{grid-column:2}.code-fragment{display:none}.orbital-one{width:105vw;height:105vw}.orbital-two{width:80vw;height:80vw}
   .reservation{grid-template-columns:1fr;padding:100px 20px 90px;gap:52px}.reservation-intro{position:relative;top:auto}.reservation-intro h2{font-size:clamp(3.6rem,15vw,6.5rem);margin:30px 0 24px}.reservation-console{width:100%;max-width:650px;margin:auto}.reservation-halo{width:80vw;right:-20vw;top:40%}
-  .artifact-stage{width:94vw;overflow:visible}.reservation-card{transform:scale(calc((94vw) / 820));transform-origin:top left}.artifact-stage{height:calc(500px * (94vw / 820))}
+  .artifact-stage{width:94vw;overflow:visible}.reservation-card{transform:scale(calc((94vw) / 820));transform-origin:top right}.artifact-stage{height:calc(500px * (94vw / 820))}
 }
 @media (max-width: 560px) {
   .cursor-glow{display:none}.brand{font-size:1.05rem}.header-action{font-size:.58rem}.hero{justify-content:center}.hero-kicker{gap:9px;white-space:nowrap}.kicker-line{width:25px}.hero-title{letter-spacing:-.07em}.hero-bottom p{font-size:.69rem}.scroll-cue{gap:8px}.scroll-cue>span:last-child{display:none}.scroll-icon{width:42px;height:42px}.aurora-one{width:100vw;height:100vw;left:10%}
