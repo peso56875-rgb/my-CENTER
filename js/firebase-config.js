@@ -9,16 +9,12 @@ const firebaseConfig = {
   measurementId: "G-TQ2W3JMHGE"
 };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase safely
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-// Initialize Firestore with offline persistence
+// Initialize Firestore
 const db = firebase.firestore();
-db.enablePersistence({ synchronizeTabs: true }).catch(err => {
-  if (err.code === 'failed-precondition') {
-    console.warn('Multiple tabs open, persistence enabled in first tab only.');
-  } else if (err.code === 'unimplemented') {
-    console.warn('Browser does not support offline persistence.');
-  }
-});
+
 

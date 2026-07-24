@@ -131,7 +131,7 @@
     }).then(docRef => {
       console.log('Reservation saved to Firestore:', docRef.id);
     }).catch(error => {
-      console.warn('Firestore add background sync:', error);
+      console.error('Firestore save failed:', error);
     });
   }
 
