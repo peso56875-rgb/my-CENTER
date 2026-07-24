@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#060709">
+  <title>PESO — لوحة التحكم والإدارة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="admin-header">
+    <div class="admin-header-container">
+      <div class="admin-brand">
+        <a href="index.html" class="brand">
+          <span class="brand-mark"><i></i><i></i></span>
+          <span>PESO</span>
+        </a>
+        <span class="admin-badge">لوحة التحكم</span>
+      </div>
+
+      <div class="admin-status">
+        <span class="status-indicator"><i></i> متصل بـ Firebase</span>
+        <button id="export-csv" class="admin-btn admin-btn-secondary">
+          <span>تصدير CSV</span> <i>↓</i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-container">
+
+      <!-- Stat Cards -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-info">
+            <span class="stat-title">إجمالي الحجوزات</span>
+            <strong id="stat-total" class="stat-value">0</strong>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">🎓</div>
+          <div class="stat-info">
+            <span class="stat-title">الصف الأول الثانوي</span>
+            <strong id="stat-grade1" class="stat-value stat-accent">0</strong>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-info">
+            <span class="stat-title">الصف الثاني الثانوي</span>
+            <strong id="stat-grade2" class="stat-value stat-blue">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Controls & Filter Bar -->
+      <section class="table-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="ابحث بالاسم، رقم الموبايل، أو الكود (P1)...">
+        </div>
+
+        <div class="filter-group">
+          <select id="grade-filter" class="admin-select">
+            <option value="ALL">جميع الصفوف</option>
+            <option value="First Secondary">الصف الأول الثانوي</option>
+            <option value="Second Secondary">الصف الثاني الثانوي</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Table Section -->
+      <section class="table-wrapper">
+        <table class="reservations-table">
+          <thead>
+            <tr>
+              <th>كود الحجز</th>
+              <th>اسم الطالب</th>
+              <th>رقم الموبايل</th>
+              <th>الصف الدراسي</th>
+              <th>تاريخ الحجز</th>
+              <th>واتساب</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="6" class="loading-state">
+                <div class="spinner"></div>
+                <span>جارٍ تحميل بيانات الحجز من الفايربيز...</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/11.7.3/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.7.3/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

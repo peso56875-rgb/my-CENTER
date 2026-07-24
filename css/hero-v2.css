@@ -1,0 +1,279 @@
+/* PESO Hero V3 — Developer Code Theme & IDE Visual */
+
+.font-mono {
+  font-family: 'Fira Code', 'DM Mono', monospace;
+}
+
+.hero-code-theme {
+  min-height: 100svh;
+  padding: 120px 4.2vw 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-code-theme::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 30%, rgba(131, 92, 255, 0.16), transparent 60%),
+    radial-gradient(ellipse 50% 60% at 20% 70%, rgba(48, 190, 180, 0.1), transparent 55%),
+    linear-gradient(180deg, rgba(6, 7, 9, 0.4) 0%, rgba(6, 7, 9, 1) 100%);
+}
+
+.hero-stage-code {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(380px, 0.9fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-copy-code {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+}
+
+/* Code Badge */
+.code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: rgba(201, 255, 77, 0.06);
+  border: 1px solid rgba(201, 255, 77, 0.22);
+  margin-bottom: 28px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 12px var(--acid);
+  animation: pulse 1.8s infinite;
+}
+
+.badge-tech {
+  color: var(--acid);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.badge-slogan {
+  color: #a0a4aa;
+  font-size: 0.7rem;
+  padding-right: 8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  direction: ltr;
+}
+
+/* Code Title */
+.hero-title-code {
+  margin: 0;
+  text-align: right;
+  font-size: clamp(2.8rem, 5.8vw, 5.5rem);
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+  font-weight: 800;
+  font-family: Alexandria, 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.hero-title-code .title-line {
+  padding: 0.04em 0.02em;
+  overflow: visible;
+}
+
+.hero-title-code em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--acid);
+  -webkit-text-stroke: 0;
+}
+
+/* Statement */
+.hero-statement-code {
+  color: #a5a9ac;
+  margin: 26px 0 0;
+  font: 400 clamp(0.85rem, 1.05vw, 1rem)/1.85 'IBM Plex Sans Arabic', sans-serif;
+  max-width: 520px;
+}
+
+.code-comment {
+  color: #6a7178;
+  font-family: 'Fira Code', 'DM Mono', monospace;
+  font-size: 0.82rem;
+  direction: ltr;
+  display: inline-block;
+}
+
+.hero-actions-code {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+/* IDE Code Window Visual */
+.hero-ide-window {
+  background: linear-gradient(145deg, rgba(22, 24, 31, 0.95), rgba(12, 13, 17, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.65), inset 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+  transition: transform 0.4s var(--ease);
+}
+
+.hero-ide-window:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+.ide-header {
+  height: 40px;
+  background: rgba(14, 15, 20, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ide-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.ide-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.ide-dots .dot.red { background: #ff5f56; }
+.ide-dots .dot.yellow { background: #ffbd2e; }
+.ide-dots .dot.green { background: #27c93f; }
+
+.ide-title {
+  color: #7d828a;
+  font-size: 0.72rem;
+  direction: ltr;
+}
+
+.ide-status {
+  font-size: 0.65rem;
+  color: var(--acid);
+  background: rgba(201, 255, 77, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  direction: ltr;
+}
+
+.ide-body {
+  padding: 20px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #d1d5db;
+}
+
+.code-line {
+  display: flex;
+  gap: 16px;
+}
+
+.line-num {
+  color: #484d54;
+  user-select: none;
+  width: 22px;
+  text-align: right;
+}
+
+/* Syntax Highlighting */
+.tok-keyword { color: #ff79c6; font-weight: 600; }
+.tok-class { color: #8be9fd; font-weight: 600; }
+.tok-func { color: #50fa7b; }
+.tok-str { color: #f1fa8c; }
+
+.ide-footer {
+  height: 32px;
+  background: rgba(10, 11, 14, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: #646870;
+  direction: ltr;
+}
+
+.ide-accent {
+  color: var(--acid);
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .hero-stage-code {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hero-copy-code {
+    align-items: center;
+    text-align: center;
+  }
+  .hero-title-code {
+    text-align: center;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.35 !important;
+  }
+  .hero-statement-code {
+    text-align: center;
+  }
+  .hero-actions-code {
+    justify-content: center;
+  }
+  .hero-ide-window {
+    transform: none !important;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-code-theme {
+    padding: 96px 14px 24px;
+  }
+  .code-badge {
+    margin-bottom: 20px;
+  }
+  .hero-title-code {
+    font-size: clamp(2.1rem, 9.5vw, 3.2rem) !important;
+    line-height: 1.38 !important;
+  }
+  .hero-actions-code {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-primary, .hero-location {
+    width: 100%;
+    min-width: 0;
+  }
+  .ide-body {
+    font-size: 0.72rem;
+    padding: 14px;
+  }
+}

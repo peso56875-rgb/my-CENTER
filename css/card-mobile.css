@@ -1,0 +1,155 @@
+/* True mobile card layout — fully responsive, no clipping */
+@media (max-width: 600px) {
+  .success-experience.open { display: block; }
+  .success-content {
+    display: flex;
+    justify-content: flex-start;
+    overflow: visible;
+  }
+  .artifact-stage {
+    width: calc(100vw - 24px) !important;
+    height: auto !important;
+    overflow: visible;
+    perspective: none;
+    margin: 0 auto;
+  }
+  .reservation-card {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0;
+    padding: 22px 18px 15px;
+    border-radius: 19px;
+    transform: none !important;
+    transform-origin: center !important;
+  }
+  .card-outline { inset: 6px; border-radius: 14px; }
+  .card-monogram { left: 10%; top: 25%; font-size: 250px; }
+  .card-header-premium { height: 45px; }
+  .card-logo-premium strong { font-size: 1.15rem; }
+  .card-logo-premium small { font-size: .42rem; }
+  .card-edition span { font-size: .43rem; }
+  .card-edition strong { font-size: .48rem; }
+  .card-route { height: 14px; }
+
+  /* Stack layout for mobile */
+  .card-composition {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+  }
+  .card-identity { padding-top: 5px; }
+  .identity-overline {
+    height: auto;
+    min-height: 29px;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+  .reservation-card .confirmed-badge { padding: 7px 10px; font-size: .46rem; }
+  .reservation-card .card-label { margin-top: 18px; font-size: .53rem; }
+  .reservation-card #card-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+    margin-top: 8px;
+    font-size: clamp(1.65rem, 8vw, 2.15rem);
+    line-height: 1.45;
+    letter-spacing: -.03em;
+  }
+
+  /* Stack data fields vertically */
+  .card-data-premium {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 17px;
+    padding: 7px 0;
+  }
+  .card-data-premium .card-detail {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,.055);
+  }
+  .card-data-premium .card-detail:last-child { border-bottom: 0; }
+  .card-data-premium .card-detail span { font-size: .48rem; flex-shrink: 0; }
+  .card-data-premium .card-detail strong { margin-top: 0; font-size: .65rem; text-align: left; }
+
+  /* Location */
+  .card-location-row {
+    margin-top: 8px;
+    min-height: 43px;
+    padding: 9px 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .card-location-row strong { font-size: .62rem; text-align: left; }
+
+  /* Reservation ID */
+  .reservation-id-premium { margin-top: 15px; align-items: center; }
+  .reservation-id-premium strong { font-size: 1.45rem; }
+
+  /* QR panel — horizontal layout on mobile */
+  .qr-panel {
+    min-height: 150px;
+    padding: 14px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 9px;
+    align-items: center;
+    border-radius: 13px;
+  }
+  .qr-caption { margin: 0; text-align: center; font-size: .48rem; }
+  .reservation-card .qr-frame {
+    width: 120px;
+    height: 120px;
+    padding: 6px;
+  }
+  .reservation-card .qr-frame canvas {
+    width: 108px !important;
+    height: 108px !important;
+  }
+  .qr-verified {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    flex-direction: column;
+    text-align: center;
+  }
+  .qr-verified span { text-align: center; }
+
+  /* Footer */
+  .card-footer-premium {
+    height: 31px;
+    margin-top: 14px;
+    grid-template-columns: 1fr auto;
+  }
+  .card-footer-premium .card-signature { display: none; }
+  .card-infinity { text-align: left; }
+
+  /* Success actions */
+  .success-actions {
+    position: relative;
+    width: calc(100vw - 24px);
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .reservation-card { padding-inline: 14px; }
+  .card-logo-premium small { display: none; }
+  .card-edition span { display: none; }
+  .qr-panel {
+    grid-template-columns: 1fr 112px 1fr;
+    padding-inline: 8px;
+  }
+  .reservation-card .qr-frame { width: 108px; height: 108px; }
+  .reservation-card .qr-frame canvas { width: 96px !important; height: 96px !important; }
+  .qr-caption { font-size: .43rem; }
+  .qr-verified span { font-size: .4rem; }
+}
