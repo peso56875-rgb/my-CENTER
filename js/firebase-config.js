@@ -1,12 +1,12 @@
 // Firebase Configuration for PESO Booking System
 const firebaseConfig = {
-  apiKey: "AIzaSyAP2r_0epXYiGoXwJk8ThuqJdlnzR_aiNo",
-  authDomain: "my-center-c834a.firebaseapp.com",
-  projectId: "my-center-c834a",
-  storageBucket: "my-center-c834a.firebasestorage.app",
-  messagingSenderId: "240238223779",
-  appId: "1:240238223779:web:1307bde5acb92f8a62fa16",
-  measurementId: "G-26SVJQK4E1"
+  apiKey: "AIzaSyB7lZEmF_gBcwWyMHQB_Ia_WXiEgi9AL8c",
+  authDomain: "my-student-e9a87.firebaseapp.com",
+  projectId: "my-student-e9a87",
+  storageBucket: "my-student-e9a87.firebasestorage.app",
+  messagingSenderId: "224479679685",
+  appId: "1:224479679685:web:9afdaa9bfdf334abd60cac",
+  measurementId: "G-TQ2W3JMHGE"
 };
 
 // Initialize Firebase
